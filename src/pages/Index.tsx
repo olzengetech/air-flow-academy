@@ -27,7 +27,8 @@ const Index = () => {
       image: module3dImage,
       icon: <Box className="h-6 w-6" />,
       progress: 35,
-      level: "Básico" as const
+      level: "Básico" as const,
+      link: "/modulo/3d"
     },
     {
       title: "Montagem e Desmontagem",
@@ -35,7 +36,8 @@ const Index = () => {
       image: moduleAssemblyImage,
       icon: <Wrench className="h-6 w-6" />,
       progress: 20,
-      level: "Intermediário" as const
+      level: "Intermediário" as const,
+      link: "/modulo/montagem"
     },
     {
       title: "Limpeza e Manutenção",
@@ -43,7 +45,8 @@ const Index = () => {
       image: moduleCleaningImage,
       icon: <Sparkles className="h-6 w-6" />,
       progress: 0,
-      level: "Intermediário" as const
+      level: "Intermediário" as const,
+      link: "/modulo/limpeza"
     },
     {
       title: "Aulas e Conceitos",
@@ -51,7 +54,8 @@ const Index = () => {
       image: moduleLessonsImage,
       icon: <GraduationCap className="h-6 w-6" />,
       progress: 10,
-      level: "Básico" as const
+      level: "Básico" as const,
+      link: "/modulo/aulas"
     }
   ];
 

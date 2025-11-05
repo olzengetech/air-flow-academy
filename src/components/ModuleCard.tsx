@@ -2,6 +2,7 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { ArrowRight, Lock } from "lucide-react";
 import { Badge } from "./ui/badge";
+import { Link } from "react-router-dom";
 
 interface ModuleCardProps {
   title: string;
@@ -11,6 +12,7 @@ interface ModuleCardProps {
   progress?: number;
   locked?: boolean;
   level?: "Básico" | "Intermediário" | "Avançado";
+  link?: string;
 }
 
 export const ModuleCard = ({ 
@@ -20,7 +22,8 @@ export const ModuleCard = ({
   icon, 
   progress = 0,
   locked = false,
-  level = "Básico"
+  level = "Básico",
+  link = "#"
 }: ModuleCardProps) => {
   const levelColors = {
     "Básico": "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20",
@@ -84,16 +87,22 @@ export const ModuleCard = ({
         )}
 
         {/* Action Button */}
-        <Button 
-          className="w-full group/btn" 
-          variant={locked ? "outline" : "default"}
-          disabled={locked}
-        >
-          {locked ? "Bloqueado" : progress > 0 ? "Continuar" : "Iniciar"}
-          {!locked && (
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-          )}
-        </Button>
+        {locked ? (
+          <Button 
+            className="w-full" 
+            variant="outline"
+            disabled
+          >
+            Bloqueado
+          </Button>
+        ) : (
+          <Link to={link} className="block">
+            <Button className="w-full group/btn">
+              {progress > 0 ? "Continuar" : "Iniciar"}
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+            </Button>
+          </Link>
+        )}
       </div>
     </Card>
   );
