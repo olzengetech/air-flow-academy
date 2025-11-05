@@ -1,17 +1,11 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 import heroImage from "@/assets/hero-hvac.jpg";
-
 export const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt="Sistema HVAC Profissional"
-          className="w-full h-full object-cover"
-        />
+        <img src={heroImage} alt="Sistema HVAC Profissional" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/85 to-primary/30" />
       </div>
 
@@ -48,19 +42,18 @@ export const Hero = () => {
           <div className="grid grid-cols-3 gap-8 pt-12 max-w-2xl mx-auto">
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-primary">50+</div>
-              <div className="text-sm text-muted-foreground mt-1">Lições Interativas</div>
+              <div className="text-sm text-muted-foreground mt-1 bg-sky-950">Lições Interativas</div>
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-primary">3D</div>
-              <div className="text-sm text-muted-foreground mt-1">Modelos Realistas</div>
+              <div className="text-sm text-muted-foreground mt-1 bg-sky-950">Modelos Realistas</div>
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-primary">100%</div>
-              <div className="text-sm text-muted-foreground mt-1">Prático</div>
+              <div className="text-sm text-muted-foreground mt-1 bg-blue-950">Prático</div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
