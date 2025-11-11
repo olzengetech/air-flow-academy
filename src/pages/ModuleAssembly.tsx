@@ -1,183 +1,240 @@
 import { Header } from "@/components/Header";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, Play, CheckCircle2, Circle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import moduleAssemblyImage from "@/assets/module-assembly.jpg";
+import { 
+  Wrench, 
+  ArrowLeft, 
+  ArrowRight,
+  PlayCircle,
+  CheckCircle,
+  Clock,
+  AlertTriangle,
+  Hammer
+} from "lucide-react";
 
 const ModuleAssembly = () => {
-  const steps = [
+  const tutorials = [
     {
-      title: "Preparação das Ferramentas",
-      description: "Separe todas as ferramentas necessárias: chaves, parafusos e manual",
-      completed: true
+      id: 1,
+      title: "Desmontagem de Coifa Doméstica",
+      level: "Básico",
+      duration: "12 min",
+      steps: 8,
+      completed: false,
+      description: "Aprenda a desmontar uma coifa residencial com segurança",
+      tools: ["Chave phillips", "Chave de fenda", "Alicate"]
     },
     {
-      title: "Instalação da Base",
-      description: "Fixe a base da coifa na parede usando os suportes corretos",
-      completed: true
+      id: 2,
+      title: "Montagem de Coifa Doméstica",
+      level: "Básico",
+      duration: "15 min",
+      steps: 10,
+      completed: false,
+      description: "Passo a passo completo para montar e instalar coifas",
+      tools: ["Chave phillips", "Nível", "Trena", "Furadeira"]
     },
     {
-      title: "Montagem do Motor",
-      description: "Encaixe o motor na estrutura principal e conecte os cabos elétricos",
-      completed: false
+      id: 3,
+      title: "Troca de Filtros e Manutenção",
+      level: "Intermediário",
+      duration: "10 min",
+      steps: 6,
+      completed: false,
+      description: "Como substituir filtros metálicos e de carvão corretamente",
+      tools: ["Chave phillips", "Luvas"]
     },
     {
-      title: "Instalação dos Filtros",
-      description: "Posicione os filtros de gordura nos encaixes apropriados",
-      completed: false
+      id: 4,
+      title: "Instalação de Exaustor Industrial",
+      level: "Intermediário",
+      duration: "25 min",
+      steps: 15,
+      completed: false,
+      description: "Montagem completa de sistema de exaustão industrial",
+      tools: ["Kit ferramentas", "Furadeira", "Parafusadeira", "Nível laser"]
     },
     {
-      title: "Conexão dos Dutos",
-      description: "Conecte os dutos de exaustão garantindo vedação adequada",
-      completed: false
-    },
-    {
-      title: "Testes Finais",
-      description: "Realize testes de funcionamento e verificação de segurança",
-      completed: false
+      id: 5,
+      title: "Montagem de Dutos e Conexões",
+      level: "Avançado",
+      duration: "30 min",
+      steps: 18,
+      completed: false,
+      description: "Técnicas profissionais de instalação de dutos HVAC",
+      tools: ["Tesoura de chapa", "Rebitadeira", "Fita metalizada"]
     }
+  ];
+
+  const safetyTips = [
+    "Sempre desligue a energia elétrica antes de iniciar",
+    "Use equipamentos de proteção individual (EPI)",
+    "Siga a ordem correta de desmontagem",
+    "Organize e identifique todas as peças removidas"
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container pt-24 pb-12">
-        <div className="mb-8">
+      {/* Hero Section */}
+      <section className="pt-24 pb-12 bg-gradient-to-br from-primary/5 via-background to-background">
+        <div className="container">
           <Link to="/">
-            <Button variant="ghost" className="mb-4">
+            <Button variant="ghost" className="mb-6">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Voltar aos Módulos
             </Button>
           </Link>
-          <h1 className="text-4xl font-bold mb-4">Montagem e Desmontagem</h1>
-          <p className="text-lg text-muted-foreground">
-            Aprenda passo a passo como montar e desmontar equipamentos HVAC
-          </p>
-        </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
-            {/* Video/Image Section */}
-            <Card className="overflow-hidden">
-              <div className="relative aspect-video bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center">
-                <img 
-                  src={moduleAssemblyImage} 
-                  alt="Ferramentas de montagem HVAC"
-                  className="w-full h-full object-cover"
-                />
-                <Button 
-                  size="lg"
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full h-16 w-16 p-0"
-                >
-                  <Play className="h-8 w-8 ml-1" />
-                </Button>
+          <div className="max-w-4xl">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+                <Wrench className="h-6 w-6" />
               </div>
-              <div className="p-6 border-t">
-                <h3 className="text-xl font-semibold mb-2">Tutorial em Vídeo</h3>
-                <p className="text-muted-foreground">
-                  Acompanhe o passo a passo visual da montagem completa de uma coifa profissional
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold">
+                  Montagem e Desmontagem
+                </h1>
+                <p className="text-muted-foreground mt-2">
+                  Tutoriais práticos passo a passo para instalar e desmontar equipamentos HVAC
                 </p>
               </div>
-            </Card>
-
-            {/* Steps List */}
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold mb-6">Passos da Montagem</h3>
-              <div className="space-y-4">
-                {steps.map((step, index) => (
-                  <div 
-                    key={index}
-                    className={`p-4 rounded-lg border transition-all ${
-                      step.completed 
-                        ? 'bg-primary/5 border-primary/20' 
-                        : 'bg-card border-border hover:border-primary/30'
-                    }`}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0">
-                        {step.completed ? (
-                          <CheckCircle2 className="h-6 w-6 text-primary" />
-                        ) : (
-                          <Circle className="h-6 w-6 text-muted-foreground" />
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold mb-1">
-                          Passo {index + 1}: {step.title}
-                        </h4>
-                        <p className="text-sm text-muted-foreground">
-                          {step.description}
-                        </p>
-                      </div>
-                      {!step.completed && (
-                        <Button size="sm" variant="outline">
-                          Iniciar
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Progresso do Módulo</h3>
-              <div className="space-y-4">
-                <div>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span>Passos Completados</span>
-                    <span className="font-medium">2/6</span>
-                  </div>
-                  <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                    <div className="h-full bg-primary" style={{ width: '33%' }} />
-                  </div>
-                </div>
-                <div className="pt-4 border-t space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Tempo estimado</span>
-                    <span className="font-medium">45 min</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Dificuldade</span>
-                    <span className="font-medium">Intermediário</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Ferramentas Necessárias</h3>
-              <div className="space-y-2">
-                {[
-                  "Chave Phillips",
-                  "Chave de Fenda",
-                  "Furadeira",
-                  "Nível",
-                  "Fita Métrica",
-                  "Alicate"
-                ].map((tool, index) => (
-                  <div key={index} className="flex items-center gap-2 text-sm">
-                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                    <span>{tool}</span>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            <Card className="p-6 bg-primary/5 border-primary/20">
-              <h3 className="text-lg font-semibold mb-2">⚠️ Segurança</h3>
-              <p className="text-sm text-muted-foreground">
-                Sempre desligue a energia antes de iniciar qualquer trabalho de instalação elétrica.
-              </p>
-            </Card>
+            </div>
           </div>
         </div>
-      </main>
+      </section>
+
+      {/* Safety Warning */}
+      <section className="py-8 bg-amber-500/10 border-y border-amber-500/20">
+        <div className="container">
+          <div className="max-w-4xl">
+            <div className="flex gap-4">
+              <AlertTriangle className="h-6 w-6 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold text-amber-900 dark:text-amber-100 mb-2">
+                  Segurança em Primeiro Lugar
+                </h3>
+                <ul className="space-y-1 text-sm text-amber-800 dark:text-amber-200">
+                  {safetyTips.map((tip, index) => (
+                    <li key={index}>• {tip}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tutorials List */}
+      <section className="py-12">
+        <div className="container">
+          <div className="max-w-4xl">
+            <h2 className="text-2xl font-bold mb-6">Tutoriais Disponíveis</h2>
+            <div className="space-y-6">
+              {tutorials.map((tutorial) => (
+                <Card 
+                  key={tutorial.id}
+                  className="p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300"
+                >
+                  <div className="flex items-start justify-between gap-6">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-3">
+                        <h3 className="text-xl font-semibold">{tutorial.title}</h3>
+                        <Badge className={
+                          tutorial.level === "Básico" 
+                            ? "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20"
+                            : tutorial.level === "Intermediário"
+                            ? "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20"
+                            : "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/20"
+                        }>
+                          {tutorial.level}
+                        </Badge>
+                        {tutorial.completed && (
+                          <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
+                        )}
+                      </div>
+                      
+                      <p className="text-muted-foreground mb-4">
+                        {tutorial.description}
+                      </p>
+
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
+                        <span className="flex items-center gap-1">
+                          <Clock className="h-4 w-4" />
+                          {tutorial.duration}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <PlayCircle className="h-4 w-4" />
+                          {tutorial.steps} passos
+                        </span>
+                      </div>
+
+                      {/* Tools needed */}
+                      <div>
+                        <p className="text-sm font-medium mb-2 flex items-center gap-2">
+                          <Hammer className="h-4 w-4" />
+                          Ferramentas necessárias:
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {tutorial.tools.map((tool, index) => (
+                            <span 
+                              key={index}
+                              className="px-3 py-1 rounded-full bg-muted text-xs font-medium"
+                            >
+                              {tool}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <Button>
+                      <PlayCircle className="mr-2 h-4 w-4" />
+                      {tutorial.completed ? 'Revisar' : 'Iniciar'}
+                    </Button>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            {/* Info Card */}
+            <Card className="p-6 mt-8 bg-primary/5 border-primary/20">
+              <div className="flex gap-4">
+                <Wrench className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold mb-2">Dicas para os Tutoriais</h3>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li>• Assista o tutorial completo antes de começar</li>
+                    <li>• Prepare todas as ferramentas necessárias</li>
+                    <li>• Tire fotos durante a desmontagem para facilitar a montagem</li>
+                    <li>• Siga a ordem dos passos rigorosamente</li>
+                    <li>• Em caso de dúvida, revise o passo anterior</li>
+                  </ul>
+                </div>
+              </div>
+            </Card>
+
+            {/* Navigation */}
+            <div className="mt-12 flex justify-between items-center">
+              <Link to="/modulo/3d">
+                <Button variant="outline">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Anterior: 3D
+                </Button>
+              </Link>
+              <Link to="/modulo/limpeza">
+                <Button>
+                  Próximo: Limpeza
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

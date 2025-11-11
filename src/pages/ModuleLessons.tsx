@@ -1,235 +1,255 @@
 import { Header } from "@/components/Header";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, BookOpen, Video, FileText, Award } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 import { Link } from "react-router-dom";
-import moduleLessonsImage from "@/assets/module-lessons.jpg";
+import { 
+  GraduationCap, 
+  ArrowLeft, 
+  ArrowRight, 
+  BookOpen, 
+  Wind,
+  Gauge,
+  ThermometerSun,
+  Fan,
+  Filter,
+  Settings2,
+  CheckCircle2,
+  Lock
+} from "lucide-react";
 
 const ModuleLessons = () => {
   const lessons = [
     {
-      title: "Introdução ao HVAC",
-      type: "Vídeo",
+      id: 1,
+      title: "Introdução aos Sistemas HVAC",
+      level: "Básico",
       duration: "15 min",
       completed: true,
-      icon: <Video className="h-4 w-4" />
+      locked: false,
+      topics: ["O que é HVAC", "História e evolução", "Aplicações práticas"],
+      icon: <GraduationCap className="h-5 w-5" />
     },
     {
+      id: 2,
       title: "Princípios de Ventilação",
-      type: "Leitura",
-      duration: "10 min",
-      completed: true,
-      icon: <FileText className="h-4 w-4" />
-    },
-    {
-      title: "Fluxo de Ar e Pressão",
-      type: "Interativo",
+      level: "Básico",
       duration: "20 min",
-      completed: false,
-      icon: <BookOpen className="h-4 w-4" />
+      completed: true,
+      locked: false,
+      topics: ["Circulação de ar", "Renovação atmosférica", "Tipos de ventilação"],
+      icon: <Wind className="h-5 w-5" />
     },
     {
-      title: "Dimensionamento de Dutos",
-      type: "Vídeo",
+      id: 3,
+      title: "Coifas Domésticas",
+      level: "Básico",
       duration: "25 min",
       completed: false,
-      icon: <Video className="h-4 w-4" />
+      locked: false,
+      topics: ["Tipos de coifas", "Funcionamento", "Instalação básica"],
+      icon: <Filter className="h-5 w-5" />
     },
     {
-      title: "Motores e Ventiladores",
-      type: "Leitura",
-      duration: "12 min",
+      id: 4,
+      title: "Exaustores e Ventiladores",
+      level: "Intermediário",
+      duration: "30 min",
       completed: false,
-      icon: <FileText className="h-4 w-4" />
+      locked: false,
+      topics: ["Tipos de exaustores", "Capacidade e CFM", "Escolha adequada"],
+      icon: <Fan className="h-5 w-5" />
+    },
+    {
+      id: 5,
+      title: "Pressão e Vazão de Ar",
+      level: "Intermediário",
+      duration: "35 min",
+      completed: false,
+      locked: false,
+      topics: ["CFM e pressão estática", "Cálculo de vazão", "Dimensionamento"],
+      icon: <Gauge className="h-5 w-5" />
+    },
+    {
+      id: 6,
+      title: "Aquecimento e Climatização",
+      level: "Intermediário",
+      duration: "40 min",
+      completed: false,
+      locked: false,
+      topics: ["Sistemas de aquecimento", "Ar condicionado", "Integração HVAC"],
+      icon: <ThermometerSun className="h-5 w-5" />
+    },
+    {
+      id: 7,
+      title: "Dutos e Distribuição de Ar",
+      level: "Avançado",
+      duration: "45 min",
+      completed: false,
+      locked: true,
+      topics: ["Projeto de dutos", "Perda de carga", "Otimização"],
+      icon: <Settings2 className="h-5 w-5" />
+    },
+    {
+      id: 8,
+      title: "Sistemas Industriais",
+      level: "Avançado",
+      duration: "50 min",
+      completed: false,
+      locked: true,
+      topics: ["HVAC industrial", "Cozinhas profissionais", "Normas técnicas"],
+      icon: <Settings2 className="h-5 w-5" />
     }
   ];
 
-  const quizzes = [
-    { title: "Quiz: Conceitos Básicos", questions: 10, score: 80 },
-    { title: "Quiz: Ventilação", questions: 15, score: null },
-    { title: "Quiz: Sistemas HVAC", questions: 20, score: null }
-  ];
+  const levelColors = {
+    "Básico": "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20",
+    "Intermediário": "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    "Avançado": "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/20"
+  };
+
+  const completedLessons = lessons.filter(l => l.completed).length;
+  const progressPercentage = (completedLessons / lessons.length) * 100;
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container pt-24 pb-12">
-        <div className="mb-8">
+      {/* Hero Section */}
+      <section className="pt-24 pb-12 bg-gradient-to-br from-primary/5 via-background to-background">
+        <div className="container">
           <Link to="/">
-            <Button variant="ghost" className="mb-4">
+            <Button variant="ghost" className="mb-6">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Voltar aos Módulos
             </Button>
           </Link>
-          <h1 className="text-4xl font-bold mb-4">Aulas e Conceitos</h1>
-          <p className="text-lg text-muted-foreground">
-            Aprenda os fundamentos teóricos de sistemas HVAC com aulas interativas
-          </p>
-        </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
-            {/* Featured Lesson */}
-            <Card className="overflow-hidden">
-              <div className="relative aspect-video">
-                <img 
-                  src={moduleLessonsImage} 
-                  alt="Aulas HVAC"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <Badge className="mb-2">Em Andamento</Badge>
-                  <h3 className="text-xl font-bold text-white">Fluxo de Ar e Pressão</h3>
-                </div>
+          <div className="max-w-4xl">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+                <GraduationCap className="h-6 w-6" />
               </div>
-              <div className="p-6 border-t">
-                <p className="text-muted-foreground mb-4">
-                  Entenda como o ar se movimenta através dos sistemas HVAC e a importância da pressão adequada.
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold">
+                  Aulas e Conceitos HVAC
+                </h1>
+                <p className="text-muted-foreground mt-2">
+                  Do básico ao avançado: domine os fundamentos de sistemas HVAC
                 </p>
-                <Button>Continuar Aula</Button>
               </div>
-            </Card>
+            </div>
 
-            {/* Lessons List */}
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold mb-6">Todas as Aulas</h3>
-              <div className="space-y-3">
-                {lessons.map((lesson, index) => (
-                  <div 
-                    key={index}
-                    className={`p-4 rounded-lg border transition-all ${
-                      lesson.completed 
-                        ? 'bg-primary/5 border-primary/20' 
-                        : 'bg-card border-border hover:border-primary/30 cursor-pointer'
-                    }`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${
-                        lesson.completed 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'bg-muted'
-                      }`}>
-                        {lesson.icon}
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold mb-1">{lesson.title}</h4>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <span>{lesson.type}</span>
-                          <span>•</span>
-                          <span>{lesson.duration}</span>
-                        </div>
-                      </div>
-                      {lesson.completed ? (
-                        <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
-                          Concluído
-                        </Badge>
-                      ) : (
-                        <Button size="sm" variant="outline">Iniciar</Button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            {/* Quizzes */}
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold mb-6">Avaliações</h3>
-              <div className="space-y-3">
-                {quizzes.map((quiz, index) => (
-                  <div 
-                    key={index}
-                    className="p-4 rounded-lg border bg-card hover:border-primary/30 transition-all cursor-pointer"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-semibold mb-1">{quiz.title}</h4>
-                        <p className="text-sm text-muted-foreground">
-                          {quiz.questions} questões
-                        </p>
-                      </div>
-                      {quiz.score !== null ? (
-                        <div className="text-right">
-                          <div className="text-2xl font-bold text-primary">{quiz.score}%</div>
-                          <div className="text-xs text-muted-foreground">Aprovado</div>
-                        </div>
-                      ) : (
-                        <Button size="sm">Fazer Quiz</Button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Progresso do Curso</h3>
-              <div className="space-y-4">
+            {/* Progress Card */}
+            <Card className="p-6 mt-8">
+              <div className="flex justify-between items-center mb-4">
                 <div>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span>Aulas Completadas</span>
-                    <span className="font-medium">2/5</span>
-                  </div>
-                  <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                    <div className="h-full bg-primary" style={{ width: '40%' }} />
-                  </div>
-                </div>
-                <div className="pt-4 border-t space-y-3">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Tempo total</span>
-                    <span className="font-medium">82 min</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Média de quizzes</span>
-                    <span className="font-medium">80%</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Conceitos Abordados</h3>
-              <div className="space-y-2">
-                {[
-                  "Ventilação Mecânica",
-                  "Pressão Estática",
-                  "Vazão de Ar (CFM)",
-                  "Eficiência Energética",
-                  "Controle de Temperatura",
-                  "Qualidade do Ar"
-                ].map((concept, index) => (
-                  <div key={index} className="flex items-center gap-2 text-sm">
-                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                    <span>{concept}</span>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            <Card className="p-6 bg-primary/5 border-primary/20">
-              <div className="flex gap-3 mb-4">
-                <Award className="h-6 w-6 text-primary flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold mb-2">Certificado</h3>
+                  <h3 className="text-lg font-semibold">Seu Progresso</h3>
                   <p className="text-sm text-muted-foreground">
-                    Complete todas as aulas e obtenha 80% nos quizzes para receber seu certificado.
+                    {completedLessons} de {lessons.length} lições completadas
                   </p>
                 </div>
+                <div className="text-2xl font-bold text-primary">
+                  {Math.round(progressPercentage)}%
+                </div>
               </div>
-              <div className="h-2 bg-background rounded-full overflow-hidden">
-                <div className="h-full bg-primary" style={{ width: '40%' }} />
-              </div>
-              <p className="text-xs text-muted-foreground mt-2">40% completo</p>
+              <Progress value={progressPercentage} className="h-3" />
             </Card>
           </div>
         </div>
-      </main>
+      </section>
+
+      {/* Lessons List */}
+      <section className="py-12">
+        <div className="container">
+          <div className="max-w-4xl space-y-6">
+            {lessons.map((lesson) => (
+              <Card 
+                key={lesson.id}
+                className={`p-6 transition-all duration-300 ${
+                  lesson.locked 
+                    ? 'opacity-60' 
+                    : 'hover:shadow-lg hover:border-primary/50 cursor-pointer'
+                }`}
+              >
+                <div className="flex items-start gap-6">
+                  {/* Icon */}
+                  <div className={`flex h-14 w-14 items-center justify-center rounded-xl flex-shrink-0 ${
+                    lesson.completed 
+                      ? 'bg-green-500/10 text-green-600 dark:text-green-400'
+                      : lesson.locked
+                      ? 'bg-muted text-muted-foreground'
+                      : 'bg-primary/10 text-primary'
+                  }`}>
+                    {lesson.locked ? <Lock className="h-6 w-6" /> : lesson.icon}
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-4 mb-3">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="text-xl font-semibold">
+                            {lesson.title}
+                          </h3>
+                          {lesson.completed && (
+                            <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0" />
+                          )}
+                        </div>
+                        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                          <Badge className={levelColors[lesson.level as keyof typeof levelColors]}>
+                            {lesson.level}
+                          </Badge>
+                          <span className="flex items-center gap-1">
+                            <BookOpen className="h-4 w-4" />
+                            {lesson.duration}
+                          </span>
+                        </div>
+                      </div>
+                      <Button 
+                        disabled={lesson.locked}
+                        className="flex-shrink-0"
+                      >
+                        {lesson.completed ? 'Revisar' : lesson.locked ? 'Bloqueado' : 'Começar'}
+                        {!lesson.locked && <ArrowRight className="ml-2 h-4 w-4" />}
+                      </Button>
+                    </div>
+
+                    {/* Topics */}
+                    <div className="flex flex-wrap gap-2">
+                      {lesson.topics.map((topic, index) => (
+                        <span 
+                          key={index}
+                          className="px-3 py-1 rounded-full bg-muted text-xs font-medium"
+                        >
+                          {topic}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {/* Navigation */}
+          <div className="max-w-4xl mt-12 flex justify-between items-center">
+            <Link to="/">
+              <Button variant="outline">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Voltar
+              </Button>
+            </Link>
+            <Link to="/modulo/3d">
+              <Button>
+                Próximo: Aprendizado 3D
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

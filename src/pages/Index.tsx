@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { ModuleCard } from "@/components/ModuleCard";
 import { ProgressDashboard } from "@/components/ProgressDashboard";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { 
   Box, 
   Wrench, 
@@ -148,14 +149,16 @@ const Index = () => {
               Junte-se a milhares de profissionais que já dominam sistemas HVAC com nossa plataforma
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-              <Button 
-                size="lg" 
-                variant="secondary"
-                className="text-lg px-8 shadow-xl hover:shadow-2xl transition-all"
-              >
-                Começar Gratuitamente
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link to="/modulo/aulas">
+                <Button 
+                  size="lg" 
+                  variant="secondary"
+                  className="text-lg px-8 shadow-xl hover:shadow-2xl transition-all"
+                >
+                  Começar Gratuitamente
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
